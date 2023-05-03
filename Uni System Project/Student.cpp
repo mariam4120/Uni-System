@@ -4,12 +4,13 @@
 #include<map>
 #include "Course.h"
 using namespace std;
-Student::Student(string name, int id, string email, string password, int maxhours, int academicYear, float gpa, vector<Course>finishedcourses, vector<Course>coursesinprogress)
+Student::Student(string name, int id, string email, string password,int currenthours , int maxhours, int academicYear, float gpa, vector<Course>finishedcourses, vector<Course>coursesinprogress)
 {
 	Name = name;
 	ID = id;
 	Email = email;
 	Password = password;
+	CurrentHours = currenthours;
 	MaximumHoursAllowed = maxhours;
 	AcademicYear = academicYear;
 	GPA = gpa;
@@ -22,18 +23,6 @@ Student::Student(string name, int id, string email, string password, int maxhour
 		CoursesInProgress[i] = coursesinprogress[i];
 	}
 }
-Student::Student(string name, int id, string email, string password, int maxhours, int academicYear, float gpa)
-{
-	Name = name;
-	ID = id;
-	Email = email;
-	Password = password;
-	MaximumHoursAllowed = maxhours;
-	AcademicYear = academicYear;
-	GPA = gpa;
-
-}
-
 Student::Student()
 {
 	Name = Email = Password = " ";
@@ -61,6 +50,7 @@ void Student::FilterStudentCourses(Student std)
 				std.FilterCourses(std.CoursesInProgress);
 				break;
 			}
+			
 			case 3:
 			{
 				Exitflag = true;
@@ -115,7 +105,7 @@ void Student::FilterCourses(vector<Course>c)
 					cout << "Requirement or Elective: " << val.RequirementOrElective << endl;
 					cout << "Maximum Number of Students: " << val.MaximumNumberofStudents << endl;
 					cout << "List of Prerequisite Required Courses:" << endl;
-					for (string course : val.ListofPrRequiredCourses)
+					for (string course : val.ListofPreRequiredCourses)
 					{
 						cout << i << "- " << course << endl;
 						i++;
@@ -144,7 +134,7 @@ void Student::FilterCourses(vector<Course>c)
 						cout << "Requirement or Elective: " << val.RequirementOrElective << endl;
 						cout << "Maximum Number of Students: " << val.MaximumNumberofStudents << endl;
 						cout << "List of Prerequisite Required Courses:" << endl;
-						for (string course : val.ListofPrRequiredCourses)
+						for (string course : val.ListofPreRequiredCourses)
 						{
 							cout << i << "- " << course << endl;
 							i++;
@@ -167,7 +157,7 @@ void Student::FilterCourses(vector<Course>c)
 						cout << "Requirement or Elective: " << val.RequirementOrElective << endl;
 						cout << "Maximum Number of Students: " << val.MaximumNumberofStudents << endl;
 						cout << "List of Prerequisite Required Courses:" << endl;
-						for (string course : val.ListofPrRequiredCourses)
+						for (string course : val.ListofPreRequiredCourses)
 						{
 							cout << i << "- " << course << endl;
 							i++;
@@ -194,7 +184,7 @@ void Student::FilterCourses(vector<Course>c)
 					cout << "Requirement or Elective: " << val.RequirementOrElective << endl;
 					cout << "Maximum Number of Students: " << val.MaximumNumberofStudents << endl;
 					cout << "List of Prerequisite Required Courses:" << endl;
-					for (string course : val.ListofPrRequiredCourses)
+					for (string course : val.ListofPreRequiredCourses)
 					{
 						cout << i << "- " << course << endl;
 						i++;
@@ -218,5 +208,163 @@ void Student::FilterCourses(vector<Course>c)
 		}
 		}
 	}
+
 }
 
+void Student:: ViewAllAvailableCourses(vector<Course> c)
+{
+	
+		
+			for (int i = 0; i < c.size(); i++)
+		 {
+			if (c[i].CurrentNumberOfStudents < c[i].MaximumNumberofStudents )
+			
+		    {
+		    cout << "Name: " << c[i].Name << endl;
+			cout << "Code: " << c[i].Code << endl;
+			cout << "Requirement or Elective: " << c[i].RequirementOrElective << endl;
+			cout << "Maximum Number of Students: " << c[i].MaximumNumberofStudents << endl;
+			cout << "List of Prerequisite Required Courses:" << endl;
+			for (int j = 0; j < c[i].ListofPreRequiredCourses.size(); j++)
+			{
+				cout << j << " - " << c[i].ListofPreRequiredCourses[j];
+			}
+			cout << "Hours: " << c[i].Hours << endl;
+			cout << "Instructor: " << c[i].Instructor << endl;
+			cout << "***************************************************************************************************************\n";
+			
+		    }
+				
+
+		 }		
+
+	
+	
+}
+
+void Student:: RegisterCourse(vector<Course>c, Student& s, string course)
+{
+	
+	bool isfound = false;
+	for (int i = 0; i < c.size(); i++)
+	{
+		
+		if (c[i].Name == course)
+		{
+			isfound = true;
+			if (c[i].CurrentNumberOfStudents < c[i].MaximumNumberofStudents && s.CurrentHours+c[i].Hours < s.MaximumHoursAllowed)
+			{
+				for (int j = 0; j < s.FinishedCourses.size(); j++)
+				{
+					if (s.FinishedCourses[j].Name != course)
+					{
+						for (int k = 0; k < c[i].ListofPreRequiredCourses.size(); k++)
+						{
+							if (s.FinishedCourses[j].Name == c[i].ListofPreRequiredCourses[k] || c[i].ListofPreRequiredCourses.size() == 0)
+							{
+									s.CoursesInProgress.push_back(c[i]);
+									s.CurrentHours++;
+									c[i].CurrentNumberOfStudents++;
+									cout << "You have registered successfully";
+							}
+							
+						}
+					}
+					else
+						cout << "You already finished this course";
+				}
+				
+			}
+			else
+				cout << "This course is full or your hours have run out";
+
+			
+
+			break;
+
+		}
+		
+		
+	
+
+	}
+	if (!isfound)
+		{
+			cout << "Not valid";
+		}
+		else
+		{
+		cout << "found";
+			
+		}
+	
+}
+
+
+void Student::ViewAllHisCourses(Student s)
+{
+	int choice;
+	cout << "1) View Finished Courses." << endl;
+	cout << "2) View In Progress Courses." << endl;
+	cin >> choice;
+
+	if (choice == 1)
+	{
+		for (int i = 0; i < s.FinishedCourses.size(); i++)
+		{
+				cout << "Name:" << " " << s.FinishedCourses[i].Name << endl;
+				cout << "Code:" << " " << s.FinishedCourses[i].Code << endl;
+				cout << "Requirement or Elective:" << " " << s.FinishedCourses[i].RequirementOrElective << endl;
+				cout << "List of Prerequisite Required Courses:" << endl;
+				for (int k = 0; k < s.FinishedCourses[i].ListofPreRequiredCourses.size(); k++)
+				{
+					cout << k + 1 << " - " << s.FinishedCourses[i].ListofPreRequiredCourses[k] << endl;
+				}
+				cout << "Hours:" << " " << s.FinishedCourses[i].Hours << endl;
+				cout << "Instructor:" << " " << s.FinishedCourses[i].Instructor << endl;
+			
+		}
+
+	}
+
+	else
+		
+	{
+		for (int i = 0; i < s.CoursesInProgress.size(); i++)
+		{
+		cout << "Name:" << " " << s.CoursesInProgress[i].Name << endl;
+		cout << "Code:" << " " << s.CoursesInProgress[i].Code << endl;
+		cout << "Requirement or Elective:" << " " << s.CoursesInProgress[i].RequirementOrElective << endl;
+		cout << "List of Prerequisite Required Courses:" << endl;
+		for (int k = 0; k < s.CoursesInProgress[i].ListofPreRequiredCourses.size(); k++)
+		{
+			cout << k + 1 << " - " << s.CoursesInProgress[i].ListofPreRequiredCourses[k] << endl;
+		}
+		cout << "Hours:" << " " << s.CoursesInProgress[i].Hours << endl;
+		cout << "Instructor:" << " " << s.CoursesInProgress[i].Instructor << endl;
+
+		}
+		
+	}
+
+
+	
+}
+
+void Student:: ViewCGPA(Student s)
+{
+	float* grades = new float[s.FinishedCourses.size()];
+	float total_grades = 0;
+	float total_hours = 0;
+	for (int i = 0; i < s.FinishedCourses.size(); i++)
+	{
+		cin >> grades[i];
+	}
+	for (int i = 0; i < s.FinishedCourses.size(); i++)
+	{
+		total_grades += grades[i]*s.FinishedCourses[i].Hours;
+		total_hours += s.FinishedCourses[i].Hours;
+	}
+	cout<< total_grades / total_hours;
+
+}

@@ -6,28 +6,18 @@
 #include<map>
 #include "Student.h"
 #include "Course.h"
-#include "AdminLogin.h"
-
 using namespace std;
 void readFromFile();
 void readCourses();
 void readStudents();
-void adminn();
 //void readAdmins();
 vector<Course>courses;
 vector<Student> students;
+
 int main()
 {
-	char f;
-	cout << "Log in as admin or student(press a for admin or s for student)\n";
-	cin >> f;
-	if (f == 'a' || f == 'A') 
-	{
-		adminn();
-	}
-
 	readFromFile();
-	/*for (const auto& s : students) 
+	/*for (const auto& s : students)
 	{
 		cout << "Name: " << s.Name << endl;
 		cout << "ID: " << s.ID << endl;
@@ -35,13 +25,13 @@ int main()
 		cout << "Password: " << s.Password << endl;
 		cout << "Maximum Hours Allowed: " << s.MaximumHoursAllowed << endl;
 		cout << "Finished Courses: ";
-		for (const auto& c : s.FinishedCourses) 
+		for (const auto& c : s.FinishedCourses)
 		{
 			cout << c.Name << ", ";
 		}
 		cout << endl;
 		cout << "Courses in Progress: ";
-		for (const auto& c : s.CoursesInProgress) 
+		for (const auto& c : s.CoursesInProgress)
 		{
 			cout << c.Name << ", ";
 		}
@@ -66,29 +56,24 @@ int main()
 	//else
 	//	cout << "Incorrect ID\n";
 	//students[0].FilterCourses(courses);
-	students[0].FilterStudentCourses(students[0]);
-}
-void adminn() {
-	AdminLogin admin_login;
-	string Adminusername;
-	string Adminpassword;
+	//students[0].FilterStudentCourses(students[0]);
+	
+	//students[0].ViewAllHisCourses(students[0]);
 
-
-	// Get username and password from user input
-	cout << "Enter username: ";
-	cin >> Adminusername;
-	cout << "Enter password: ";
-	cin >> Adminpassword;
-
-	// Verify login
-	if (admin_login.verifyAdminLogin(Adminusername, Adminpassword))
+	//students[0].ViewAllAvailableCourses(courses);
+	for (int i = 0; i < students[0].CoursesInProgress.size(); i++)
 	{
-		cout << "Admin login successful!" << endl;
+		cout << students[0].CoursesInProgress[i].Name;
 	}
-	else {
-		cout << "Admin login failed." << endl;
+	string name;
+	getline(cin,name);
+	students[0].RegisterCourse(courses, students[0], name);
+	for (int i = 0; i < students[0].CoursesInProgress.size(); i++)
+	{
+		cout << students[0].CoursesInProgress[i].Name;
 	}
-
+	
+	/*students[0].ViewCGPA(students[0]);*/
 }
 
 void readFromFile()
@@ -102,7 +87,6 @@ void readStudents()
 	ifstream input;
 	input.open("Students.txt");
 	string name, email, password;
-	
 	string cname, code, req, instructor, prereq, str;
 	int hours, max;
 	long long id;
@@ -126,7 +110,7 @@ void readStudents()
 			stringstream ss(prereq);
 			while (getline(ss, str, ','))
 			{
-				c.ListofPrRequiredCourses.push_back(str);
+				c.ListofPreRequiredCourses.push_back(str);
 			}
 			input >> hours;
 			input.ignore();
@@ -159,7 +143,7 @@ void readStudents()
 
 			while (getline(ss, str, ','))
 			{
-				c.ListofPrRequiredCourses.push_back(str);
+				c.ListofPreRequiredCourses.push_back(str);
 			}
 			input >> hours;
 			input.ignore();
@@ -204,7 +188,7 @@ void readCourses()
 		stringstream ss(line);
 		while (getline(ss, prereq, ','))
 		{
-			c.ListofPrRequiredCourses.push_back(prereq);
+			c.ListofPreRequiredCourses.push_back(prereq);
 		}
 		input >> hours;
 		input.ignore();
