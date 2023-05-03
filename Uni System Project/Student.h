@@ -14,22 +14,22 @@ public:
 	string Email;
 	string Password;
 	int MaximumHoursAllowed;
+	int CurrentHours;
 	vector<Course>FinishedCourses;
 	vector<Course>CoursesInProgress;
 	int AcademicYear;
 	float GPA;
-	Student(string name, int id, string email, string password, int maxhours, int academicYear, float gpa, vector<Course>finishedcourses, vector<Course>coursesinprogress);
-	Student(string name, int id, string email, string password, int maxhours, int academicYear, float gpa);
+	Student(string name, int id, string email, string password, int currenthours, int maxhours, int academicYear, float gpa, vector<Course>finishedcourses, vector<Course>coursesinprogress);
 	Student();
 	void EditData(map<int, Student> stdData, int stdID);
 	void FilterCourses(vector<Course> c);
 	void FilterStudentCourses(Student std);
 	//Log in.
-	//	View List of all available courses.
+	void ViewAllAvailableCourses(vector<Course> c);
 	//	View details of a specific course.
-	//	Register for a course.
-	//	View all his / her courses.
-	//	View his / her courses grades and cumulative GPA.
+	void RegisterCourse(vector <Course>c, Student& s, string course);
+	void ViewAllHisCourses(Student s);
+	void ViewCGPA(Student s);
 };
 
 
