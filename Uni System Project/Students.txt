@@ -1,0 +1,90 @@
+Mariam Reda 
+Data Structure
+CIS270
+Requirement
+450
+Structured Programming,English 
+3
+Wedad Hussein
+Introduction to Computer Sciences
+CIS160
+Requirement
+700
+No pre-required courses
+3
+Walaa Khaled
+Structured Programming
+CIS150
+Requirement
+800
+No pre-required courses
+3
+Salsabil Amin
+
+2021170504
+2021170504@cis.asu.edu.eg
+passmariam
+21
+calculus 1
+BSC122
+Requirement
+500
+No pre-required courses
+3
+Mohamed Abdel-Aal
+
+2023
+3.49
+mariam salah 
+physics 1
+BSC121
+Requirement
+550
+No pre-required courses
+3
+Salsabil Amin
+English 
+HUM110
+elective
+300
+No pre-required courses
+2
+Aml Ahmed
+
+2021170507
+2021170507@cis.asu.edu.eg
+passmariam1
+21
+Probability&Statistical
+BSC123
+Requirement
+650
+No pre-required courses
+3
+Hassan Ramdan
+
+2023
+3.1
+mariam ahmed 
+Electronics
+CIS124
+Requirement
+730
+physics 1
+4
+Noha Abdel Sabour
+
+2021170672
+2021170672@cis.asu.edu.eg
+passmariam2
+21
+Human Rights
+HUM119
+elective
+300
+No pre-required courses
+2
+Ali Reda
+
+2023
+3.5

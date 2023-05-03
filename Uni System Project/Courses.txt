@@ -1,0 +1,84 @@
+Data Structure
+CIS270
+Requirement
+450
+Structured Programming,English 
+3
+Wedad Hussein
+Introduction to Computer Sciences
+CIS160
+Requirement
+700
+No pre-required courses
+3
+Walaa Khaled
+Structured Programming
+CIS150
+Requirement
+800
+No pre-required courses
+3
+Salsabil Amin
+calculus 1
+BSC122
+Requirement
+500
+No pre-required courses
+3
+Mohamed Abdel-Aal
+physics 1
+BSC121
+Requirement
+550
+No pre-required courses
+3
+Salsabil Amin
+English 
+HUM110
+elective
+300
+No pre-required courses
+2
+Aml Ahmed
+Probability&Statistical
+BSC123
+Requirement
+650
+No pre-required courses
+3
+Hassan Ramdan
+calculus 2
+BSC125
+Requirement
+600
+calculus 1
+3
+Mohamed Abdel-Aal
+Object Oriented Programming
+CIS250
+Requirement
+600
+Structured Programming
+3
+Mohamed Mabrouk
+Database
+CIS280
+Requirement
+400
+Structured Programming
+3
+Huda Amin
+Electronics
+CIS124
+Requirement
+730
+physics 1
+4
+Noha Abdel Sabour
+Human Rights
+HUM119
+elective
+300
+No pre-required courses
+2
+Ali Reda
